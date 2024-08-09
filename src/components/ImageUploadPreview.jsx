@@ -54,7 +54,7 @@ const ImageUploadPreview = () => {
 
       try {
         const response = await axios.post(
-          "http://20.84.124.151/image",
+          "http://20.84.124.151/api/image",
           payload
         );
         const { output_image, result } = response.data;
