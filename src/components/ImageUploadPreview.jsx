@@ -96,8 +96,8 @@ const ImageUploadPreview = () => {
   };
   return (
     <div className="flex flex-col items-center mt-8 w-full mb-56">
-      <div className="flex flex-col mb-4">
-        <h2 className="text-lg font-bold mb-2 mt-5">Test models:</h2>
+      <div className="flex flex-col mb-4 w-96">
+        <h2 className="text-lg font-bold mb-2 mt-5">Models:</h2>
         <div>
           {models?.map((data) => (
             <button
@@ -114,7 +114,13 @@ const ImageUploadPreview = () => {
           ))}
         </div>
       </div>
+      <div>
+
+      <h2 className="w-96 text-lg font-bold mb-2 mt-5">Test model:</h2>
+      </div>
+
       <div className="w-96 h-96 flex items-center justify-center bg-gray-100 rounded-md border border-gray-300">
+        
         {preview ? (
           <img
             src={preview}
