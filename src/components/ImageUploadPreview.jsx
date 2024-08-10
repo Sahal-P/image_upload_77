@@ -167,16 +167,16 @@ const ImageUploadPreview = () => {
         )}
       </div>
       {outputImage && (
-        <>
-          <h2 className="text-lg font-bold mb-2 mt-5">Processed Image:</h2>
-          <div className="mt-8 w-96 h-96 flex items-center justify-center bg-gray-100 rounded-md border border-gray-300">
+        <div>
+          <h2 className="text-lg font-bold mb-2 mt-10">Processed Image:</h2>
+          <div className=" w-96 h-96 flex items-center justify-center bg-gray-100 rounded-md border border-gray-300">
             <img
               src={outputImage}
               alt="Processed Output"
               className="w-full h-full object-contain rounded-md"
             />
           </div>
-        </>
+        </div>
       )}
 
       {/* Display the JSON result */}
