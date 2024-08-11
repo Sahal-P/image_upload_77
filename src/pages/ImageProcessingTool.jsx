@@ -134,7 +134,12 @@ const ImageProcessingTool = () => {
         <KeyValueInput
           keyValuePairs={userInput}
           className={""}
-          setKeyValuePairs={setUserInput}
+          setKeyValuePairs={(value) => {
+            console.log(value);
+            
+            if (value?.length > 3) toast.error("The number of key values exceeds the allowed limit of 3.");
+            else setUserInput(value)
+          }}
         />
         <div>
           <h2 className="w-96 text-lg font-bold mb-2 mt-5">Test model:</h2>
