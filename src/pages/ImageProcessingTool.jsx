@@ -40,11 +40,7 @@ const ImageProcessingTool = () => {
   }, []);
 
   const handleModelSelect = (model) => {
-    if (model === selectedModel) {
-      setSelectedModel("");
-    } else {
       setSelectedModel(model);
-    }
   };
 
   const handleImageChange = (e) => {
@@ -81,7 +77,7 @@ const ImageProcessingTool = () => {
       const base64String = reader.result.split(",")[1];
 
       const payload = {
-        model_name: selectedModel,
+        model_name: !userInput.length ? selectedModel : "",
         image_bytes: base64String,
         user_input: userInput,
       };
