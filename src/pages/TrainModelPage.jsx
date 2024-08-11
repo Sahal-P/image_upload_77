@@ -3,17 +3,19 @@ import { TextField, Button, CircularProgress } from "@mui/material";
 import { toast } from "react-toastify";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ModelTrainingIcon from "@mui/icons-material/ModelTraining";
 import KeyValueInput from "../components/KeyValueInput";
 import axios from "axios";
 import { TRAIN_MODEL } from "../axios/api";
+import { useNavigate } from "react-router-dom";
 
 const TrainModelPage = () => {
   const [productName, setProductName] = useState("");
   const [goodImages, setGoodImages] = useState([]);
   const [badImages, setBadImages] = useState([]);
   const [keyValuePairs, setKeyValuePairs] = useState([]);
-
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(false);
 
   const handleImageUpload = (e, setImages) => {
@@ -29,12 +31,7 @@ const TrainModelPage = () => {
   };
 
   const handleTrainModel = async () => {
-    if (
-      !productName ||
-      !goodImages.length ||
-      !badImages.length ||
-      !keyValuePairs.length
-    ) {
+    if (!productName || !goodImages.length || !badImages.length) {
       toast.error("Please fill in all the fields.");
       return;
     }
@@ -64,7 +61,7 @@ const TrainModelPage = () => {
       });
       if (response.data?.message) {
         toast.success(response.data?.message);
-        toast.info('The training process may take up to 2 hours to complete.');
+        toast.info("The training process may take up to 2 hours to complete.");
       }
     } catch (error) {
       toast.error("Failed to train model. Please try again.");
@@ -76,7 +73,10 @@ const TrainModelPage = () => {
 
   return (
     <>
-      <div className="flex flex-col lg:flex-row p-6 space-y-6 lg:space-y-0 lg:space-x-6 min-h-screen">
+      <div className="flex flex-col lg:flex-row p-6 pt-14 space-y-6 lg:space-y-0 lg:space-x-6 min-h-screen">
+      <div className="w-full fixed top-2 left-2">
+        <Button variant="outlined" onClick={() => navigate(-1)}> <ArrowBackIcon /> </Button>
+      </div>
         <div className="flex flex-col w-full lg:w-2/3 space-y-4">
           <TextField
             label="Product Name"
@@ -179,6 +179,7 @@ const TrainModelPage = () => {
           <KeyValueInput
             keyValuePairs={keyValuePairs}
             setKeyValuePairs={setKeyValuePairs}
+            className={"w-full"}
           />
           <div className="flex p-4 justify-between">
             <Button

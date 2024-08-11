@@ -8,8 +8,9 @@ import ModelSelector from "../components/ModelSelector";
 import ImagePreview from "../components/ImagePreview";
 import JsonResultViewer from "../components/JsonResultViewer";
 import { Button } from "@mui/material";
-import ModelTrainingIcon from '@mui/icons-material/ModelTraining';
+import ModelTrainingIcon from "@mui/icons-material/ModelTraining";
 import { useNavigate } from "react-router-dom";
+import KeyValueInput from "../components/KeyValueInput";
 
 const ImageProcessingTool = () => {
   const [image, setImage] = useState(null);
@@ -19,9 +20,10 @@ const ImageProcessingTool = () => {
   const [jsonResult, setJsonResult] = useState(null);
   const [models, setModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState(""); // Default model name
+  const [userInput, setUserInput] = useState([]); // Default model name
   const [productStatus, setProductStatus] = useState(""); // Default model name
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchModels = async () => {
@@ -38,7 +40,11 @@ const ImageProcessingTool = () => {
   }, []);
 
   const handleModelSelect = (model) => {
-    setSelectedModel(model);
+    if (model === selectedModel) {
+      setSelectedModel("");
+    } else {
+      setSelectedModel(model);
+    }
   };
 
   const handleImageChange = (e) => {
@@ -77,6 +83,7 @@ const ImageProcessingTool = () => {
       const payload = {
         model_name: selectedModel,
         image_bytes: base64String,
+        user_input: userInput,
       };
 
       try {
@@ -85,14 +92,14 @@ const ImageProcessingTool = () => {
 
         if (product_status) {
           if (product_status === "success") {
-            setProductStatus("SUCCESS")
+            setProductStatus("SUCCESS");
           } else if (product_status === "failed") {
-            setProductStatus("FAILED")
+            setProductStatus("FAILED");
           }
         }
         // Convert the output_image from base64 to a displayable format
         setOutputImage(`data:image/png;base64,${output_image}`);
-        
+
         // Set the JSON result
         setJsonResult(result);
         if (msg) {
@@ -100,7 +107,6 @@ const ImageProcessingTool = () => {
         } else {
           toast.success("Image uploaded successfully!");
         }
-        
       } catch (error) {
         if (error?.response?.status === 500) {
           toast.error(error?.message);
@@ -117,19 +123,28 @@ const ImageProcessingTool = () => {
   return (
     <div className="flex flex-wrap justify-center items-center min-h-screen bg-gray-50">
       <div className="w-full fixed top-2 left-2">
-        <Button variant="outlined" onClick={() => navigate('/train')}>Train <ModelTrainingIcon /> </Button>
+        <Button variant="outlined" onClick={() => navigate("/train")}>
+          Train <ModelTrainingIcon />{" "}
+        </Button>
       </div>
-      <div className="flex flex-wrap flex-col items-center mt-8 w-full min-w-[300px] mb-56">
+      <div className="flex flex-wrap flex-col items-center mt-8 w-96 min-w-[300px] mb-56">
         <ModelSelector
           models={models}
           onSelectModel={handleModelSelect}
           selectedModel={selectedModel}
         />
+        <h2 className="text-lg font-bold mb-2 mt-5">Or:</h2>
+
+        <KeyValueInput
+          keyValuePairs={userInput}
+          className={""}
+          setKeyValuePairs={setUserInput}
+        />
         <div>
           <h2 className="w-96 text-lg font-bold mb-2 mt-5">Test model:</h2>
         </div>
 
-        <ImagePreview preview={preview} outputImage={outputImage} productStatus={productStatus} />
+        <ImagePreview preview={preview} outputImage={outputImage} />
         <UploadControls
           image={image}
           loading={loading}
@@ -140,7 +155,15 @@ const ImageProcessingTool = () => {
         {outputImage && (
           <div>
             <h2 className="text-lg font-bold mb-2 mt-10">Processed Image:</h2>
-            <div className=" w-96 h-96 flex items-center justify-center bg-gray-100 rounded-md border border-gray-300">
+            <div
+              className={` w-96 h-96 flex items-center justify-center rounded-md border border-gray-300 ${
+                productStatus === "SUCCESS"
+                  ? "border-green-500 border-[3px] p-2"
+                  : productStatus === "FAILED"
+                  ? "border-red-500 border-[3px] p-2"
+                  : "border-gray-300"
+              }`}
+            >
               <img
                 src={outputImage}
                 alt="Processed Output"

@@ -5,7 +5,7 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import AddIcon from '@mui/icons-material/Add';
 
 
-const KeyValueInput = ({keyValuePairs, setKeyValuePairs}) => {
+const KeyValueInput = ({keyValuePairs, setKeyValuePairs, className}) => {
   const [currentKey, setCurrentKey] = useState('');
   const [currentValue, setCurrentValue] = useState('');
 
@@ -22,7 +22,7 @@ const KeyValueInput = ({keyValuePairs, setKeyValuePairs}) => {
   };
 
   return (
-    <div className="w-full mx-auto p-4 border rounded-md shadow-sm bg-white">
+    <div className={`${className} mx-auto p-4 border rounded-md shadow-sm bg-white`}>
       <h2 className="text-lg font-bold mb-4">Add Key-Value Pairs</h2>
 
       <div className="flex gap-4 mb-4">

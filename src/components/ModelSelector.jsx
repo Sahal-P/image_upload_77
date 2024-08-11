@@ -2,7 +2,7 @@
 
 const ModelSelector = ({ models, selectedModel, onSelectModel }) => {
   return (
-    <div className="flex flex-col mb-4 w-96">
+    <div className="flex flex-col mb-4">
       <h2 className="text-lg font-bold mb-2 mt-5">Models:</h2>
       <div>
         {models?.map((data) => (
