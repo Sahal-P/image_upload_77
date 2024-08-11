@@ -43,10 +43,10 @@ const KeyValueInput = ({keyValuePairs, setKeyValuePairs}) => {
         <Button
           onClick={handleAddPair}
           variant='contained'
-          className="bg-blue-500 text-white py-2 px-4 rounded-md"
+          className="text-white py-2 px-4 rounded-md"
         >
           Add
-          <AddIcon />
+          <AddIcon className='w-4 h-4 ml-2' />
         </Button>
       </div>
 

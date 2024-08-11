@@ -81,7 +81,7 @@ const ImageProcessingTool = () => {
 
       try {
         const response = await axios.post(POST_RUN_IMAGE, payload);
-        const { output_image, result, product_status } = response.data;
+        const { output_image, result, product_status, msg } = response.data;
 
         if (product_status) {
           if (product_status === "success") {
@@ -92,10 +92,15 @@ const ImageProcessingTool = () => {
         }
         // Convert the output_image from base64 to a displayable format
         setOutputImage(`data:image/png;base64,${output_image}`);
-
+        
         // Set the JSON result
         setJsonResult(result);
-        toast.success("Image uploaded successfully!");
+        if (msg) {
+          toast.success(msg);
+        } else {
+          toast.success("Image uploaded successfully!");
+        }
+        
       } catch (error) {
         if (error?.response?.status === 500) {
           toast.error(error?.message);

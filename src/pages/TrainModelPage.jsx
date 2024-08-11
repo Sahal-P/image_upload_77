@@ -3,6 +3,7 @@ import { TextField, Button, CircularProgress } from "@mui/material";
 import { toast } from "react-toastify";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import ModelTrainingIcon from "@mui/icons-material/ModelTraining";
 import KeyValueInput from "../components/KeyValueInput";
 import axios from "axios";
 import { TRAIN_MODEL } from "../axios/api";
@@ -61,7 +62,10 @@ const TrainModelPage = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      if (response.data?.message) toast.success(response.data?.message);
+      if (response.data?.message) {
+        toast.success(response.data?.message);
+        toast.info('The training process may take up to 2 hours to complete.');
+      }
     } catch (error) {
       toast.error("Failed to train model. Please try again.");
       console.error("Error:", error);
@@ -195,7 +199,14 @@ const TrainModelPage = () => {
               onClick={handleTrainModel}
               disabled={loading}
             >
-              {loading ? <CircularProgress size={24} /> : "Train Model"}
+              {loading ? (
+                <CircularProgress size={24} />
+              ) : (
+                <>
+                  Train Model
+                  <ModelTrainingIcon className="w-4 h-4 ml-2" />
+                </>
+              )}
             </Button>
           </div>
         </div>
