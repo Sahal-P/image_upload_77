@@ -1,16 +1,22 @@
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
-import ImageUploadPreview from "./components/ImageUploadPreview";
+import ImageUploadPreview from "./pages/ImageProcessingTool";
+import TrainModelPage from "./pages/TrainModelPage";
 
 function App() {
   return (
     <>
-      <div className="flex justify-center items-center min-h-screen bg-gray-50">
-        <ImageUploadPreview />
-      <ToastContainer />
-      </div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<ImageUploadPreview />} />
+          <Route path="/train" element={<TrainModelPage />} />
+        </Routes>
+
+        <ToastContainer />
+      </Router>
     </>
   );
 }
