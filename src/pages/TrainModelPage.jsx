@@ -3,7 +3,7 @@ import { TextField, Button, CircularProgress } from "@mui/material";
 import { toast } from "react-toastify";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ModelTrainingIcon from "@mui/icons-material/ModelTraining";
 import KeyValueInput from "../components/KeyValueInput";
 import axios from "axios";
@@ -15,7 +15,7 @@ const TrainModelPage = () => {
   const [goodImages, setGoodImages] = useState([]);
   const [badImages, setBadImages] = useState([]);
   const [keyValuePairs, setKeyValuePairs] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const handleImageUpload = (e, setImages) => {
@@ -74,9 +74,12 @@ const TrainModelPage = () => {
   return (
     <>
       <div className="flex flex-col lg:flex-row p-6 pt-14 space-y-6 lg:space-y-0 lg:space-x-6 min-h-screen">
-      <div className="w-full fixed top-2 left-2">
-        <Button variant="outlined" onClick={() => navigate(-1)}> <ArrowBackIcon /> </Button>
-      </div>
+        <div className="w-full fixed top-2 left-2">
+          <Button variant="outlined" onClick={() => navigate(-1)}>
+            {" "}
+            <ArrowBackIcon />{" "}
+          </Button>
+        </div>
         <div className="flex flex-col w-full lg:w-2/3 space-y-4">
           <TextField
             label="Product Name"

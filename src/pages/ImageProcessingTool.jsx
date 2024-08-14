@@ -40,7 +40,7 @@ const ImageProcessingTool = () => {
   }, []);
 
   const handleModelSelect = (model) => {
-      setSelectedModel(model);
+    setSelectedModel(model);
   };
 
   const handleImageChange = (e) => {
@@ -136,12 +136,15 @@ const ImageProcessingTool = () => {
           className={""}
           setKeyValuePairs={(value) => {
             console.log(value);
-            
-            if (value?.length > 3) toast.error("The number of key values exceeds the allowed limit of 3.");
-            else setUserInput(value)
 
-            if (selectedModel) setSelectedModel('')
-              if (value?.length === 0) setSelectedModel(models?.[0].model)
+            if (value?.length > 3)
+              toast.error(
+                "The number of key values exceeds the allowed limit of 3."
+              );
+            else setUserInput(value);
+
+            if (selectedModel) setSelectedModel("");
+            if (value?.length === 0) setSelectedModel(models?.[0].model);
           }}
         />
         <div>

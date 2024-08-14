@@ -1,10 +1,5 @@
-
 const ListImage = () => {
-  return (
-    <div>
-      list image
-    </div>
-  )
-}
+  return <div>list image</div>;
+};
 
-export default ListImage
+export default ListImage;

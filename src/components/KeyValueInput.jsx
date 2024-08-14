@@ -1,19 +1,21 @@
 /* eslint-disable react/prop-types */
-import { Button } from '@mui/material';
-import { useState } from 'react';
+import { Button } from "@mui/material";
+import { useState } from "react";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 
-
-const KeyValueInput = ({keyValuePairs, setKeyValuePairs, className}) => {
-  const [currentKey, setCurrentKey] = useState('');
-  const [currentValue, setCurrentValue] = useState('');
+const KeyValueInput = ({ keyValuePairs, setKeyValuePairs, className }) => {
+  const [currentKey, setCurrentKey] = useState("");
+  const [currentValue, setCurrentValue] = useState("");
 
   const handleAddPair = () => {
     if (currentKey && currentValue) {
-      setKeyValuePairs([...keyValuePairs, { key: currentKey, value: currentValue }]);
-      setCurrentKey('');
-      setCurrentValue('');
+      setKeyValuePairs([
+        ...keyValuePairs,
+        { key: currentKey, value: currentValue },
+      ]);
+      setCurrentKey("");
+      setCurrentValue("");
     }
   };
 
@@ -22,7 +24,9 @@ const KeyValueInput = ({keyValuePairs, setKeyValuePairs, className}) => {
   };
 
   return (
-    <div className={`${className} mx-auto p-4 border rounded-md shadow-sm bg-white`}>
+    <div
+      className={`${className} mx-auto p-4 border rounded-md shadow-sm bg-white`}
+    >
       <h2 className="text-lg font-bold mb-4">Add Key-Value Pairs</h2>
 
       <div className="flex gap-4 mb-4">
@@ -42,22 +46,22 @@ const KeyValueInput = ({keyValuePairs, setKeyValuePairs, className}) => {
         />
         <Button
           onClick={handleAddPair}
-          variant='contained'
+          variant="contained"
           className="text-white py-2 px-4 rounded-md"
         >
           Add
-          <AddIcon className='w-4 h-4 ml-2' />
+          <AddIcon className="w-4 h-4 ml-2" />
         </Button>
       </div>
 
       <ul className="list-disc pl-5">
         {keyValuePairs.map((pair, index) => (
           <li key={index} className="flex justify-between mb-2 items-center">
-            <span><span className='font-semibold'>{pair.key}</span> : {pair.value}</span>
-            <Button
-              onClick={() => handleRemovePair(index)}
-            >
-              <RemoveCircleIcon className='text-red-500 hover:text-red-700'/>
+            <span>
+              <span className="font-semibold">{pair.key}</span> : {pair.value}
+            </span>
+            <Button onClick={() => handleRemovePair(index)}>
+              <RemoveCircleIcon className="text-red-500 hover:text-red-700" />
             </Button>
           </li>
         ))}
